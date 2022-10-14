@@ -1,10 +1,10 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QColorDialog, QSlider
-from template.window import Ui_MainWindow
-from connect_dialog import ConnectDialog
-from surface import Surface
-from client import Client
-from listener import Listener
+from .template.window import Ui_MainWindow
+from .connect_dialog import ConnectDialog
+from .surface import Surface
+from .client import Client
+from .listener import Listener
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):

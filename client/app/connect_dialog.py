@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QDialog
-from template.connection import Ui_Dialog
+from .template.connection import Ui_Dialog
 from random import randint
 from utils.ip_adress import IpAddress
 
