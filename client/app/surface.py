@@ -1,8 +1,8 @@
 from PyQt5 import QtGui, QtCore
-from PyQt5.QtGui import QCursor
+from PyQt5.QtGui import QCursor, QBrush
 from PyQt5.QtWidgets import QLabel
 from time import time
-
+from PyQt5.QtCore import Qt
 
 class Surface(QLabel):
     def __init__(self, app):
@@ -13,9 +13,10 @@ class Surface(QLabel):
         self.setPixmap(canvas)
         self.painter = QtGui.QPainter(self.pixmap())
         self.set_pen()
+        self.clear_surface()
         # self.setCursor(QCursor(QtCore.Qt.CrossCursor))
 
-    def set_pen(self, size=5, color='red'):
+    def set_pen(self, size=1, color='white'):
         self.pen.setWidth(size)
         self.pen.setColor(QtGui.QColor(color))
         self.painter.setPen(self.pen)
@@ -39,3 +40,7 @@ class Surface(QLabel):
         message = self.set_message(event)
         self.client.sendto(bytes(message, 'utf-8'), self.client.get_server)
         super().mouseMoveEvent(event)
+
+    def clear_surface(self):
+        self.painter.fillRect(0, 0, 2000, 2000, QBrush(Qt.black))
+        self.update()

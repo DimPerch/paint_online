@@ -1,7 +1,7 @@
 import socketserver
 from utils.ip_adress import IpAddress
 from json import loads
-SERVER_ADDRESS = IpAddress('192.168.0.104', 8888)
+SERVER_ADDRESS = IpAddress('192.168.26.133', 8888)
 
 
 class ServerHandler(socketserver.BaseRequestHandler):

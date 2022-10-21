@@ -25,6 +25,10 @@ class Listener(Thread):
 
             self.last_draw = data
             self.app.surface.update()
+        if data['command'] == 'clear':
+            if self.app.surface:
+                self.app.surface.clear_surface()
+
         if data['command'] == 'bye':
             self.close()
 

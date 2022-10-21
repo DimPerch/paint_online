@@ -1,5 +1,8 @@
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QBrush, QColor
 from PyQt5.QtWidgets import QMainWindow, QColorDialog, QSlider
+from PyQt5 import QtGui
+
 from .template.window import Ui_MainWindow
 from .connect_dialog import ConnectDialog
 from .surface import Surface
@@ -13,6 +16,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.button_pencil.clicked.connect(self.show_dialog_color)
         self.button_connect.clicked.connect(self.show_dialog_connect)
+        self.button_clear.clicked.connect(self.clear_surface)
 
         self.client = None
         self.surface = None
@@ -29,6 +33,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if dialog.exec_() and self.surface:
             self.surface.set_pen(size=pen_size.value(), color=dialog.selectedColor().name())
 
+    def clear_surface(self):
+        if self.client:
+            self.client.sendto(bytes(str({"command": "clear"}), 'utf-8'), self.client.get_server)
+
+
     def show_dialog_connect(self):
         dialog = ConnectDialog()
         if dialog.exec_():
@@ -43,6 +52,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.scrollArea.setWidget(self.surface)
         self.client.sendto(bytes(str({"command": "hello"}), 'utf-8'), self.client.get_server)
         self.listener.start()
+
 
     def closeEvent(self, event):
         if self.client:
