@@ -15,7 +15,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.button_pencil.clicked.connect(self.show_dialog_color)
-        self.button_connect.clicked.connect(self.show_dialog_connect)
+        self.action_connect.triggered.connect(self.show_dialog_connect)
         self.button_clear.clicked.connect(self.clear_surface)
 
         self.client = None

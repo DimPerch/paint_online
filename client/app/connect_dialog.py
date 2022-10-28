@@ -9,6 +9,7 @@ class ConnectDialog(QDialog, Ui_Dialog):
         super().__init__()
         self.setupUi(self)
         self.random_port_checkBox.stateChanged.connect(self.random_port)
+        self.button_ok.clicked.connect(self.accept)
         self.client_port = None
         self.server = None
 
