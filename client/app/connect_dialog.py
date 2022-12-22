@@ -36,7 +36,7 @@ class ConnectDialog(QDialog, Ui_Dialog):
         server = IpAddress.parse_ip(server_ip_port)
         message = self.is_valid(client_port, server)
         if message:
-            self.status_label_out.setText(message)
+            self.heading_label.setText(message)
         else:
             self.client_port = client_port
             self.server = server

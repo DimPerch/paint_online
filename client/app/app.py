@@ -3,24 +3,44 @@ from PyQt5.QtGui import QBrush, QColor
 from PyQt5.QtWidgets import QMainWindow, QColorDialog, QSlider
 from PyQt5 import QtGui
 
-from .template.window import Ui_MainWindow
+from .template.window import Ui_Main_Window
 from .connect_dialog import ConnectDialog
 from .surface import Surface
 from .client import Client
 from .listener import Listener
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(QMainWindow, Ui_Main_Window):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.button_pencil.clicked.connect(self.show_dialog_color)
         self.action_connect.triggered.connect(self.show_dialog_connect)
         self.button_clear.clicked.connect(self.clear_surface)
-
+        self.color_red.clicked.connect(self.change_color_red)
+        self.color_blue.clicked.connect(self.change_color_blue)
+        self.color_yellow.clicked.connect(self.change_color_yellow)
+        self.color_green.clicked.connect(self.change_color_green)
         self.client = None
         self.surface = None
         self.listener = None
+
+    def change_color_red(self):
+        if self.surface:
+            self.surface.set_pen(color=QBrush(Qt.red))
+
+    def change_color_blue(self):
+        if self.surface:
+            self.surface.set_pen(color=QBrush(Qt.blue))
+
+    def change_color_yellow(self):
+        if self.surface:
+            self.surface.set_pen(color=QBrush(Qt.yellow))
+
+    def change_color_green(self):
+        if self.surface:
+            self.surface.set_pen(color=QBrush(Qt.green))
+
 
     def show_dialog_color(self):
         dialog = QColorDialog()
@@ -32,6 +52,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         dialog.setLayout(layout)
         if dialog.exec_() and self.surface:
             self.surface.set_pen(size=pen_size.value(), color=dialog.selectedColor().name())
+
 
     def clear_surface(self):
         if self.client:
