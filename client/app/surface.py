@@ -14,9 +14,11 @@ class Surface(QLabel):
         self.painter = QtGui.QPainter(self.pixmap())
         self.set_pen()
         self.clear_surface()
+        self.size = 1
         # self.setCursor(QCursor(QtCore.Qt.CrossCursor))
 
     def set_pen(self, size=1, color='white'):
+        self.size = size
         self.pen.setWidth(size)
         self.pen.setColor(QtGui.QColor(color))
         self.painter.setPen(self.pen)

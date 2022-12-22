@@ -21,25 +21,30 @@ class MainWindow(QMainWindow, Ui_Main_Window):
         self.color_blue.clicked.connect(self.change_color_blue)
         self.color_yellow.clicked.connect(self.change_color_yellow)
         self.color_green.clicked.connect(self.change_color_green)
+        self.button_eraser.clicked.connect(self.change_color_black)
         self.client = None
         self.surface = None
         self.listener = None
 
+    def change_color_black(self):
+        if self.surface:
+            self.surface.set_pen(size=self.surface.size, color=QBrush(Qt.black))
+
     def change_color_red(self):
         if self.surface:
-            self.surface.set_pen(color=QBrush(Qt.red))
+            self.surface.set_pen(size=self.surface.size, color=QBrush(Qt.red))
 
     def change_color_blue(self):
         if self.surface:
-            self.surface.set_pen(color=QBrush(Qt.blue))
+            self.surface.set_pen(size=self.surface.size, color=QBrush(Qt.blue))
 
     def change_color_yellow(self):
         if self.surface:
-            self.surface.set_pen(color=QBrush(Qt.yellow))
+            self.surface.set_pen(size=self.surface.size, color=QBrush(Qt.yellow))
 
     def change_color_green(self):
         if self.surface:
-            self.surface.set_pen(color=QBrush(Qt.green))
+            self.surface.set_pen(size=self.surface.size, color=QBrush(Qt.green))
 
 
     def show_dialog_color(self):
